@@ -53,8 +53,8 @@ def run_gs_mrc(input_file, output_file, reduction_min=80):
         subprocess.run(cmd, check=True)
         
         diff, percentage = get_size_stats(input_path, output_path, debug=False)
-        if reduction > reduction_min:
-            continue
+        if reduction < reduction_min:
+            break
         if diff < 0:
             reduction -= 10
             continue
