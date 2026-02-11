@@ -18,4 +18,8 @@ COPY . .
 
 # 5. This command keeps the container alive indefinitely 
 # so you can 'exec' into it anytime.
+# DEV
 CMD ["tail", "-f", "/dev/null"]
+
+#PROD
+# CMD ["python", "api_layer.py"]

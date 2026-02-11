@@ -49,14 +49,15 @@ def upload_base64_file():
         check_ttl(OUTPUT_FOLDER, 3600)
         
         return jsonify({
+            "success": True,
             "message": "File reduced successfully",
-            "output": result,
+            "filebase64": result,
             "diff_bits": diff,
             "percentage": percentage
         }), 201
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 if __name__ == '__main__':
     # Listen on all interfaces so Docker can route traffic
