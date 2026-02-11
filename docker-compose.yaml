@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: pdf-compressor
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    tty: true            # Keeps the container running
+    stdin_open: true     # Allows you to interact with it
+    working_dir: /app
