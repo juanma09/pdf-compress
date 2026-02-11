@@ -30,6 +30,7 @@ def upload_base64_file():
     try:
         # 1. Get the base64 string
         b64_string = data['file_b64']
+        reduction_target = data.get('min_resolution', 80)
         
         # 2. Generate a filename based on current timestamp
         # Format: 1707012345.pdf

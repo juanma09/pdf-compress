@@ -5,7 +5,7 @@ import shutil
 
 from utils import get_size_stats
 
-def run_gs_mrc(input_file, output_file):
+def run_gs_mrc(input_file, output_file, reduction_min=80):
     input_path = os.path.abspath(input_file)
     output_path = os.path.abspath(output_file)
     
@@ -53,12 +53,12 @@ def run_gs_mrc(input_file, output_file):
         subprocess.run(cmd, check=True)
         
         diff, percentage = get_size_stats(input_path, output_path, debug=False)
-        if reduction < 80:
+        if reduction < reduction_min:
             break
         if diff < 0:
             reduction -= 10
             continue
-        if percentage < 35:
+        if percentage < 15:
             reduction -= 5
             continue
         break
@@ -128,9 +128,9 @@ def is_heavy_image_pdf(file_path):
     return (img_area / page_area) > 0.8
 
 
-def reduce(input_file, output_file):
+def reduce(input_file, output_file, reduction_min=80):
     if is_heavy_image_pdf(input_file):
-        run_gs_mrc(input_file, output_file)
+        run_gs_mrc(input_file, output_file, reduction_min)
     else:
         run_gs_vector(input_file, output_file)
 
