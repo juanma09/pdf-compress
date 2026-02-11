@@ -42,7 +42,7 @@ def upload_base64_file():
         base64_to_file(b64_string, filepath)
 
 
-        reduce(filepath, output_filepath)
+        reduce(filepath, output_filepath, reduction_target)
         diff, percentage = get_size_stats(filepath, output_filepath)
 
         result = file_to_base64(output_filepath)

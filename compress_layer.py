@@ -13,7 +13,7 @@ def run_gs_mrc(input_file, output_file, reduction_min=80):
     if not os.path.exists(input_path):
         print(f"Error: Input file not found at: {input_path}")
         return
-    reduction = 144
+    reduction = max(reduction_min, 144)
     while True:
         cmd = [
             "gs",
@@ -53,8 +53,8 @@ def run_gs_mrc(input_file, output_file, reduction_min=80):
         subprocess.run(cmd, check=True)
         
         diff, percentage = get_size_stats(input_path, output_path, debug=False)
-        if reduction < reduction_min:
-            break
+        if reduction > reduction_min:
+            continue
         if diff < 0:
             reduction -= 10
             continue
